@@ -1,0 +1,327 @@
+---
+title: "Practical Statistics For Data Science"
+author: Mary E Rudis
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: html_document
+---
+
+# Data Around Us
+
+Data is a quantity, quality or attribute that can be used to distinguish one person, place, thing or event from another; data can help decide if something is within some range of expectation, or perhaps just to determine a pattern, make a prediction, or indicate that something has changed.
+
+What's in a name? For example, Time (http://time.com/5040377/top-baby-names-trends-2017/) reported the "Top 10" baby names for 2017. For girls they were Sophia, Olivia, Emma, Ava, Isabella, Mia, Aria, Riley, Zoe and Amelia. For boys they were Jackson, Liam, Noah, Aiden, Lucas, Caden, Grayson, Mason, Elijah and Logan. Social scientists may be interested in tracking these lists over time. When does a name first appear? How long does it stay on the list? Is there something influencing these choices? A list of such names is an example of what we call qualitative data. It can tell us something about ourselves and how we live.
+
+With qualitative data, we are largely concerned with the presence or abundance of something in a population. If we were to fly a helicopter over a crowd gathering and take a picture of the crowd, is it possible to use qualitative data and get an idea of who is represented there? Qualities like race, ethnicity, age, sex, marital status, employment status, are all data that can be associated with the people in the crowd to some extent or another. But some are easier to observe than others. Without asking the people, all we can do is to use external clues and make educated guesses. Our guesses may be off, but we certainly will not confuse a baby with an adult. This is all part of statistics too, that is being ok with being wrong and allowing for error.
+
+What's interesting to a data scientist is what influences the makeup of a crowd, and what were the variables that led to the crowd being there in the first place. For example, if the crowd is there because of a concert would the type of music or the performer influence the makeup of the crowd? Almost certainly it would. We use data to show "what is" and then try to make predictions of "what might be" or to test an assumption. We also want to know what data can be used to determine an outcome. A data scientist might want to use crowd data to make predictions about the next gathering on that particular location.
+
+We use statistics all the time without realizing it. On a popular social media platform someone posts an image of a crowd at a concert. The performer is doing something of interest and the person who posted the image makes the claim that Beyoncé was the performer. Upon closer inspection, you see that a vast majority of people in the audience are older in appearance (55+ in age), almost all white, and about equal male-female. You conclude that this was not in fact a Beyoncé concert and dismiss the potentially intriguing claim. Why? Could it be that every concert with Beyoncé as the performer had a similar audience? Is it possible to predict a future audience based on the first 10, or 20 audiences? If there is a relationship between the performer and the audience then yes, it is possible.
+
+In a split second, you decided that the image was not what was claimed to be. In statistical terms, this is what we call "rejecting the claim" or also "rejecting the assumption". Let's break it down:
+
+1) Evidence: the photo that clearly shows the attributes (qualitative data) of the audience at an event (in statistics we call this the observed event and the crowd in the photo is a sample)
+2) Assumption: the event was a Beyoncé concert
+3) The test of the assumption: in this case, there are basically three (not just one) attributes of the audience that made us decide to reject the assumption: race (skin color), sex and age. These are what statisticians call factors. If we laid out all photos of all Beyoncé concerts and approximated the proportion of those who appear white, those who appear to be male, and those 55+ what you have is a distribution with which to compare the sample.
+
+    In this case, the sample appears to be completely outside the distribution of known         events. It is what statisticians call a "rare event" that is way outside the bounds of      what is expected to occur. When something happens that is rare, there are two possible      explanations (this is called the Rare Event Rule).
+
+    Explanation 1: The photo actually is a Beyoncé concert and the audience just happened by       chance. (Maybe she performed at a Very Large retirement community by random chance)
+
+    Explanation 2: The assumption is incorrect and this is not a Beyoncé concert.
+    
+    We decide based on the likelihood (probability) of Explanation 1. If the probability is low enough (close to zero in this case) we go with the second explanation.
+
+First things first. In the next few chapters we will focus on "what is the nature of data". What are the more interesting features of data and what are some things that a single set of numbers or other list can tell us?
+
+We will be using the word <b>distribution</b> a lot. This is simply a picture of <i>how likely</i> or <i>how frequently</i> each potential outcome/observation (on the x axis) either has occurred or will occur in theory. If we are starting with a set of observed data, then we are graphing what has occurred. Bar graphs and histograms and density graphs are all ways to display distributions, because on the vertical (y) axis the numbers you see there are either actual frequencies or adjusted frequencies (adjusted to probabilities).
+
+We will also be using a statistical tool called "R". Every exercise you see in this book will be able to be performed here: https://rdrr.io/snippets/ though it should be noted that whatever you do on that site is public.
+
+```{r, echo=FALSE, results = 'asis'}
+library(stats)
+library(graphics)
+library(ggplot2)
+
+chk <- chickwts
+boxplot(weight ~ feed, data = chk, col = "yellow",
+        main = "chickwt data",
+        ylab = "Weight at six weeks (gm)")
+```
+
+
+
+```{r, echo=FALSE, results = 'asis'}
+library(stats)
+library(graphics)
+library(ggplot2)
+chk <- chickwts
+p2 <- ggplot(chk, aes(x = weight, fill = feed)) +
+  geom_density(alpha = 0.7, stat = "density (probability)") +
+  scale_colour_brewer(type = "qual")
+p2
+```
+
+
+```{r, echo=FALSE, results = 'asis'}
+library(stats)
+library(graphics)
+library(ggplot2)
+chk <- chickwts
+p3 <- ggplot(chk, aes(x = weight, fill = feed)) +
+  geom_histogram(alpha = 0.7, stat = "bin", position = "stack", binwidth = 25)
+  # scale_colour_brewer(type = "qual")
+p3
+```
+
+
+
+```{r, echo=FALSE, results = 'asis'}
+library(stats)
+library(graphics)
+library(ggplot2)
+# Separate out each feed type as its own data
+chk_horsebean <- chk[1:10,1]
+chk_linseed <- chk[11:22,1]
+chk_soybean <- chk[23:36,1]
+chk_sunflower <- chk[37:48,1]
+chk_meatmeal <- chk[49:59,1]
+chk_casein <- chk[60:71,1]
+```
+
+
+
+```{r, echo=FALSE, results = 'asis'}
+library(stats)
+library(graphics)
+library(ggplot2)
+stem(chk_casein)
+stem(chk_horsebean)
+stem(chk_linseed)
+stem(chk_meatmeal)
+stem(chk_soybean)
+stem(chk_sunflower)
+```
+
+
+# Some Discrete Data and Distributions
+
+
+Data is considered discrete and numeric if the outcomes can be associated to the integers, such as counting how many times something occurs. Usually there is a requirement that the outcomes can be ordered from largest to smallest in a meaningful way as well in order to be considered discrete. Examples:
+    a house street number indicates relative position on a street
+    a deli counter number indicates placement for customer service
+    number of goals scored is the count of occurrences of something
+    category of a tropical storm indicates intensity level
+
+Categorical data that is ordinal (where it makes no sense to calculate a mean or quantitative value)
+  ISBN number of a book
+  zip code
+  IP address
+  last four digits of phone number
+  
+Telling the difference between discrete numeric data and categorical data can sometimes be confusing. In fact, in some situations one can treat the data as either discrete numeric or categorical depending on what one is interested in doing with it.
+
+## Example 1 - School Survey
+
+
+Consider a questionnaire in which subjects are asked to rate the frequency of a list of instructional practices and other occurrences in the classroom choosing a number that is <i>closest</i> to what the student experiences. The choices are (1) for "fewer than 1 out of 5 classes", (2) for "2 out of every 5 classes", (3) for "2 out of 3 classes", (4) for "4 out of 5 classes", and (5) for "14 out of 15 classes (nearly always)". Suppose every student had to complete one of these for every teacher they had and this was distributed to every class throughout a particular school.
+
+At first glance we see that these numbers seem to have a "least" and a "greatest", and a teacher that received an "average" score of 4.2 might seem to have better job performance than a teacher that received an "average" score of 2.8. But looking closer at the questions we might see that for some items getting a (1) is preferrable to a (5). How often a student feels unsafe in the room should be (1) not (5). This possibility leads to a discussion about the design of a survey and what makes a good one versus a bad one. Making certain that (5) is consistently the highest level of performance and (1) is the lowest level of performance is a consideration in choosing a good survey to begin with.
+
+Another is lack of ambiguity in the response levels. Compare the (1) - (5) descriptions above with this: (1) - rarely, (2) - less rarely, (3) - consistent, (4) - above average, and (5) - exceptional. The problems with these choices are twofold. First is that words like "rare" and "consistent" are open to interpretation. Is consistent 60% of the time or 80% of the time? The second problem is that some of the language suggests comparing this class and teacher to other classes and teachers rather than a standard outcome. The phrase "above average" is suggestive about being above average compared with other teachers in the school.
+
+The choice of a 5-point scale is also deliberate especially when using a rubric or other scale to weigh each response and then calculate an overall score. The center (middle option) should equate to a measure that meets expectations for the institution as it seeks to meet instructional objectives as part of an overall philosophy for what a good classroom experience is. Anything to one side or another of the middle should be increasingly rare.
+
+Besides designing a good survey or questionnaire, there are also serious concerns regarding the manner in which a survey is conducted and distributed. One might think it rather obvious that the teacher who is being evaluated not be present in the room while students are completing it, but sometimes people ignore recommendations and simply do what is convenient. There are all sorts of <b>convenience biases</b> that can occur and this is one of them. Giving the survey to the first 3 students in the door is another one.
+
+Finally, a comment should be made concerning entry of survey results onto a spreadsheet - a rectangular grid. Each column should represent each simple random variable or each <b>measure</b> (such as the responses to the 3rd classroom practice listed) taken across all <b>observations</b> (or instances of the measure). Across the top, therefore, will be a column for "student_id", another for "grade", "subject", "course", "teacher_id" and every other unique quantity or response that is being associated with a particular questionnaire. Clearly in this case every completed questionnaire is a separate observation. Observations are the rows of the data frame. If there were 4,633 questionnaires completed then there will be 4,633 rows of data with an additional row across the top for each variable name.
+
+For the sake of discussion, suppose the school is interested in answering the following questions with this questionnaire:
+1) How is a particular teacher's behavior changing with time?
+2) How is a particular course (such as "grade 11 civics") changing with time?
+3) What are some differences from one discipline or subject area to another?
+4) How has a particular student's experience changed over time?
+5) In any one discipline, do these practices seem to be the same regardless of grade level and course taught?
+6) Do students in this school observe certain behaviors more in some subjects than others regardless of grade level?
+7) Can this survey tell us anything about student attitudes toward a subject? toward a teacher? toward school?
+
+### Questions For Discussion:
+
+1. One school has each teacher administer the questionnaire to their own class by passing them out and leaving the room while the students complete it. Another school has multiple staff people administer the questionnaire in the classrooms by passing them out and staying in the room while the students complete it. Which do you think will be more reliable? Discuss your reasoning.
+2. A third school can't afford to distribute the questionnaire to everyone in every class. They take each grade level, each discipline (subject area) and each teacher as unique <b>strata</b> and then select at random 4 students in each of these. Can each of the seven questions still be answered with this approach? (This is called <b>stratified sampling</b>.)
+3. What sort of bias can occur if students are required to put their name on the questionnaire? What problem(s) may be solved by using a code, such as a student ID number instead of a name?
+4. What other ethical considerations should be made when designing the questionnaire? when distributing the questionnaire? when publishing the results? when collecting the data? when storing the data?
+
+Using proper terminology, the sample space of responses to any of the questions is {1,2,3,4,5}. When we collect all responses and record them we should have a simple random variable that looks like a list of these numbers from the sample space. Suppose all the students at a particular school conspired to respond to each question by rolling a 5-sided die, or d-5 and selecting that number on the sheet. Repeat until the entire questionnaire is complete. That being the case, instead of getting a true response we should expect each outcome to occur with equal likelihood or probability. So if there were 10,000 rolls of the die, we expect the number of 1s to be roughly equal to the number of 2s, equal to # of 3s, equal to # of 4s and 5s also.
+
+The graph of frequencies for each outcome (x) is what is called a uniform distribution. In this case it is the discrete version of the uniform distribution. In R, we can create a set of data that might have occurred at this school.
+
+
+```{r}
+library(purrr)
+x <- rdunif(10000, 5, 1)
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)
+hist(x, breaks = edges)
+```
+
+If we convert this to show probabilities instead of frequencies we get this:
+
+```{r}
+library(purrr)
+x <- rdunif(10000, 5, 1)
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)
+hist(x, freq=FALSE, breaks = edges, ylab = "Probabilities")
+```
+
+Assuming Pr(X = x) = 0.2 for our discrete uniform distribution with 5 outcomes, we see that the heights of the columns in the histogram are close to 0.2.
+
+Suppose someone asked for Pr(X < 4). Then we simply add Pr(X=1) + Pr(X=2) + Pr(X=3) which is 0.2 + 0.2 + 0.2 = 3 * 0.2 = 0.6. "Under the d-5 method we can expect 60% of the responses will be less than 4" which also means "Under the d-5 method we can expect 40% of the responses to be 4 or 5." 60% + 40% is 100%.
+
+Had the survey gone smoothly and students took it seriously, the results would have involved 3 occurring the most frequently, then 2s and 4s about even but less than the 3s, and 1s and 5s about even but with the least number of each. To produce a simulation of this, we need the 3 column to be tallest and then the rest going downward and symmetrical on both sides. The discrete version of this is the binomial distribution with a single observation consisting of 4 trials and probability of success = 0.5; repeat for 10,000 observations (just has to be a big number).
+
+Why? Isn't the binomial distribution about 2 outcomes - success versus failure? Let's have a closer look.
+
+Take a coin and flip it 4 times. Record the number of "tails" - 0, 1, 2, 3, or 4. From a probability standpoint, what result is most likely? Answer: 2. Why? Well, let's list all the possible outcomes of the experiment. {HHHH, HHHT, HHTH, HTHH, THHH, HHTT, HTHT, THHT, HTTH, THTH, TTHH, HTTT, THTT, TTHT, TTTH, TTTT} is the sample space of unique results of which there are 16 possibilities. As you can see, there is 1 way to get 0 tails, 4 ways to get 1 tail, 6 ways to get 2 tails, 4 ways to get 3 tails and 1 way to get 4 tails.
+
+From only two outcomes, we have grown to 16 that all belong to one of 5 "types" that differ by number of tails (which we can call successes). Here is a table that shows what all can be done with 4 coin flips:
+
+```{r, echo=FALSE, results = 'asis'}
+library(knitr)
+outcomes <- c("HHHH", "HHHT  HHTH  HTHH  THHH", "HHTT  HTHT  THHT  HTTH  THTH  TTHH",
+              "HTTT  THTT  TTHT  TTTH", "TTTT")
+num_of_tails <- c(0, 1, 2, 3, 4)
+frequencies <- c(1, 4, 6, 4, 1)
+probabilities <- frequencies/16
+survey_responses <- num_of_tails + 1
+data_frame <- cbind(outcomes, num_of_tails, frequencies, probabilities, survey_responses)
+kable(data_frame, caption = "Binomial Example That Looks Like Our Survey")
+plot(probabilities ~ num_of_tails, type = "h")
+```
+
+Simulating a set of 10,000 responses in R is simply a clever use of the binomial distribution - which produces numbers from 0 to 4. We add 1 to these values so that our outcomes are survey responses, 1 to 5. As we see from the included histogram that the probabilty of a "3" is a bit less than 0.4. 
+What is your estimate for Pr(X < 4)?
+
+```{r}
+x <- rbinom(10000, size = 4, p = 0.5) + 1
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)
+hist(x, freq=FALSE, breaks = edges)
+```
+
+### Lab Activity For Example 1
+
+1. Suppose a decision is being made that is based on the sum of the roll of a D-6 and a D-12. That means a 6-sided die and a 12-sided die. In R, simulate what the results might look like if you rolled a D-6 10,000 times and a D-12 the same number of times, then added the results. [Hint: If d6 has 10,000 rolls of the D-6 and d12 has 10,000 rolls of a D-12, then just add them:  total <- d6 + d12]
+2. Plot a histogram or bar graph of the total. For interest, calculate the mean and standard deviation, and the summary statistics (quantiles) for the total score. Plot a boxplot as well.
+3. What is Pr(total > 11)? HINT: Use the binomial distribution with size = 16, p = 0.5 and sum the appropriate probabilities.
+
+## Example 2 - Baseball
+
+
+Another very common distribution is the Poisson distribution. It is considered a discrete data distribution because it comes from counting how many times something occurs within a certain time span, or within another unit measure. The Poisson distribution applies when: 
+1. the event is something that can be counted in whole numbers
+2. occurrences are independent, so that one occurrence does not change the probability of another
+3. the average frequency of occurrence for the period in question is known
+4. it is possible to count how many events have occurred, but meaningless to ask how many such events have not occurred (if we knew both p and q we'd use the binomial distribution)
+5. data has the characteristic that the mean and variance are about the same
+
+In order to warm up to the exercise for this topic, here are some examples of questions that might be answered using a Poisson probability calculation.
+
+Problem 1. It has been observed that the average number of traffic accidents on I-95 within a 30-mile radius of Portland, Maine between 7 and 8 AM on Wednesday mornings is 1 per hour. What is the probability that there will be 2 accidents on that same section of I-95, on some specified Wednesday morning?
+
+Problem 2. Coliform bacteria are randomly distributed in the Kennebunk river at an average concentration of 1 per 20cc of water. If we draw from the river a test tube containing 10cc of water, what is the probability that the sample contains exactly 2 coliform bacteria?
+
+Problem 3. A cafe in Portsmouth NH has recorded that they get an average of 2.5 customers between 2 and 3 pm on Thursdays. Staffing shifts are adjusted accordingly and break times put during these slower times. Experience shows that the assigned levels are adequate to handle a high of 5 customers during that hour. What is the probability that 6 customers or more will be received between 2 and 3 pm some Thursday, in which case the cafe might be understaffed?
+
+Problem 4. A typist has observed on average 2 mistakes per 3 pages typed when typing research papers for clients. In a fifteen page research paper, what is the probability that there will be fewer than 9 mistakes?
+
+The challenge for a statistician, or a data scientist, is often to start with a set of data and determine what the correct shape of the data, and the characteristics of the population it represents. So often, statistical analysis has conditions for going beyond descriptive methods to making inference about population attributes, which is why it is important to determine what we can about the data in front of us.
+
+From the simulated baseball data that is part of the datasets for this book, let's do some quick summary statistics on each of the three datasets, strikeouts per 9 innings pitched, runs per game and homers per game over 162 games. For some summary statistics use the same techniques as studied in the first chapter. For review, shown here is the strikeout data.
+
+(Note: the simulated data is based on actual statistics reported for the 2015 season of the Philadelphia Phillies)
+
+
+```{r, echo = FALSE}
+strikeouts <- rpois(162, 7.23)
+runs_per_game <- rpois(162, 3.86)
+homers_per_game <- rpois(162, 0.80)
+```
+
+```{r}
+summary(strikeouts)
+sd(strikeouts)
+var(strikeouts)
+hist(strikeouts)
+boxplot(strikeouts)
+qqnorm(strikeouts)
+qqline(strikeouts)
+
+```
+
+Notice the mean and variance are virtually the same for strikeouts. Also, we might be inclined to interpret the data as being "close" to normal. But in the normal probability plot, we see that there is some right-skewness to the data. While not pronounced, it is there. In fact, for the Poisson distribution the larger the mean and variance the more symmetric the distribution does appear to be.
+
+Knowing what the data represents helps with the decision about the shape and other relevant information. Looking at baseball statistics, we are given data in the form of frequencies - strikeouts per 9 innings pitched, runs per game, and homeruns hit per game. These are all "rates". Not much else is known, so the Poisson distribution is a valid choice.
+
+The following are results for runs per game.
+
+```{r}
+summary(runs_per_game)
+sd(runs_per_game)
+var(runs_per_game)
+hist(runs_per_game)
+boxplot(runs_per_game)
+qqnorm(runs_per_game)
+qqline(runs_per_game)
+```
+
+The following are results for homeruns hit per game.
+
+```{r}
+summary(homers_per_game)
+sd(homers_per_game)
+var(homers_per_game)
+hist(homers_per_game)
+boxplot(homers_per_game)
+qqnorm(homers_per_game)
+qqline(homers_per_game)
+```
+
+Before we discuss the results, let's look at a few more plots of the data.
+
+```{r, echo=FALSE, message=FALSE}
+library(ggplot2)
+library(ggpubr)
+
+team_data <- as.numeric(c(strikeouts, runs_per_game, homers_per_game))
+
+measure_type <- c(rep("strikeouts", 162), rep("runs per game", 162),
+                            rep("homers per game", 162))
+baseball_data <- cbind.data.frame(team_data, measure_type)
+
+plot1 <- ggplot(baseball_data, aes(x = team_data, fill = measure_type)) +
+      geom_bar(alpha = 0.7, position = "dodge", width = 0.6) +
+      scale_colour_brewer(type = "qual") +
+      theme(legend.position = "none")
+plot2 <- ggplot(baseball_data, aes(x = team_data, fill = measure_type)) +
+        geom_density(alpha = 0.7, stat = "count") +
+        scale_colour_brewer(type = "qual") + 
+        theme(legend.position = c(.95, .95),
+              legend.justification = c("right", "top"),
+              legend.box.just = "right",
+              legend.margin = margin(6, 6, 6, 6)
+              )
+
+ggarrange(plot1, plot2, ncol = 2, nrow = 1)
+
+```
+
+### Questions For Discussion Based on Example 2
+
+1. What is it about these data that suggest the Poisson distribution, and Poisson probability formula is appropriate?
+
+2. What is the sample space for each variable we are studying - strikeouts, runs per game, and homeruns hit per game? More specifially, is there a maximum? How likely is 20 strikeouts in 9 innings?
+
+3. The formula for $Pr(X = x) = \frac{\lambda^xe^{-\lambda}}{x!}$ where $\lambda$ is the average number of occurrences over the period (9 innings or 1 game). It is the mean of each dataset in our 3 examples. Note that $\lambda$ does not have to be a whole number because it's an average over time. For strikeouts, runs and homers, calculate the following probabilities:
+    a. Pr(X = 0)
+    b. Pr(X > 9)
+    c. Pr(X = 3)
+    d. Pr(X < 2)
+    
