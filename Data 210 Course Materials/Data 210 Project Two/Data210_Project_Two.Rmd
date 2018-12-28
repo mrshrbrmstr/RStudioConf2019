@@ -1,0 +1,66 @@
+---
+title: "R Notebook: Project Two"
+author: "Mary E Rudis"
+date: '2/4/2018'
+output: 
+html_document:
+    df_print: paged
+---
+
+## Data 210G - Project Two - DUE February 15, 2018
+
+### Project Two Part A
+
+Run the following in RStudio:
+
+```{r, echo=FALSE, message=FALSE}
+library("MASS", lib.loc="/Library/Frameworks/R.framework/Versions/3.4/Resources/library")
+require(ggplot2)
+```
+
+For the first part of Project Two, you will create and display some plots using the geyser dataset in the MASS package.
+
+1) Your report will be in the form of a ".Rmd" file with code chunks included that will produce the requested plots as well as descriptions in front of each code chunk explaining features of the plots that are of interest to a data scientist.
+2) Use the same "YAML" heading that you see on this document but please include your name as author
+3) Name the file using your initials_project_two. If I were to submit the file, I would name it "mr_project_two.Rmd"
+4) Plot One: Use the title "Old Faithful Eruption Data". Create a scatter plot using ggplot with the duration variable as the "x" and the waiting variable as the "y". When using the "ggplot()" function, you MUST create the plot object (here you will see it named "gg") and then print it to the html document:
+
+```{r}
+# Creates a plot called gg with two layers - points and a line of best fit
+ gg <- ggplot(cars, aes(speed, dist)) +
+     geom_point(colour='#E69F00', size = 3) +
+     geom_smooth(method=lm, se = FALSE, colour = '#56B4E9')
+ gg # prints gg
+```
+
+5) Plots Two and Three: <b>Use the title "Old Faithful Eruption Duration" on each of the following</b> versions of the same plot. Create a histogram that shows how many data points fall within each range. Each bar height is determined by the frequency (count) of values in that range shown on the x axis. When graphing histograms, "binning" the data is an essential part of the process.
+
+Explain (in detail) how the data was "binned" in the following:
+
+```{r}
+hist(geyser$duration)
+```
+
+Explain (in detail) how this change in the parameters of the code produced a different result. Comment on which is better given the data available.
+
+```{r, message=FALSE}
+hist(geyser$duration, 
+     breaks = c(0.50,0.9995,1.4995,1.9995,2.4995,2.9995,3.4995,3.9995,4.4995,4.9995,5.4995), 
+     freq=TRUE)
+```
+
+6) Plot Four: Use the title "Old Faithful Eruption Wait Times (in minutes)". Create a histogram of the geyser waiting data. Please make an effort to bin the data in a way that seems appropriate. Include the R code chunk and the output in the .Rmd document.
+
+7) Plots Five and Six: Create two new datasets from geyser, one called "highduration", the other called "lowduration" (exactly as seen in this week's quiz). The highduration data will contain the rows that correspond to a duration that is greater than or equal to 3.5. The lowduration data will contain the rows that correspond to a duration that is less than 3.5. Create  scatter plot for each of these separately. (299 rows in the geyser data will get split between these two new datasets.)
+
+### Project Two Part B
+
+8) Putting It All Together: Let's take a look at the "diamonds" dataset in R. We're going to see if the quality of the cut justifies splitting the data by that factor.
+
+First, just start with a few simple histograms (use ggplot with geom_histogram and also geom_freqpoly for the carat data) of the variable carat. Repeat for the variable price (this time use geom_freqpoly); also for the variable price. You should experiment with different values before settling on a final version of each of the 3 plots.
+
+After seeing these plots, you should have a good idea of how spread out these values are.
+Also, you can see where the largest groupings of values are. For example, more than 25% of the diamonds appear to be worth less than 1,000 even though some diamonds are worth more than $17,000. The median price is __________?
+
+Your task for this final part of the assignment is to create a scatterplot of carats versus price on FIVE separate graphs based on the value of cut. In other words, you will use the function "facet_wrap" and graph carats versus price for each set of data that has the same cut. We consider this splitting the data (clustering) by a characteristic (cut). 
+

@@ -1,0 +1,52 @@
+---
+title: 'R Notebook: Project One'
+author: "Mary E Rudis"
+date: "1/21/2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Data 210G - Project One - DUE February 1, 2018
+
+This is the Project One description using an R Notebook file. You can see the advantages of using this format. Instead of "ProjectOne.R" you may instead submit projects in either R Markdown or R Notebook format. The filename will be "ProjectOne.Rmd"
+
+Run the following in RStudio:
+
+```{r}
+mpg1 <- mtcars[1]
+mpg2 <- mtcars$mpg
+variables <- names(mtcars)
+vehicles <- rownames(mtcars)
+
+```
+
+Observe there are now several items listed under "Environment"
+
+Type comments about each of these four objects. What kind of object is each thing?
+
+For example, the following shows code **plus comment inserted:**
+
+```{r}
+  Data1 <- 1:20    ## R creates a vector of integers from 1 to 20 with length 20
+```
+
+Now include the following lines of code:
+
+```{r}
+is.vector(mpg1)
+is.data.frame(mpg1)
+is.vector(mpg2)
+```
+
+Run and comment on the result. How are mpg1 and mpg2 the same? How are they different?
+
+For this part, you will need to insert code chunks into your .Rmd file as needed.
+
+1) Store the data from the R dataset mtcars into an object named motor_trend_data
+
+2) Calculate the smallest value, largest value, and average of mpg as well as hp.
+
+3) Create a list of length 19 that starts with the 7 colors of the rainbow, ie red, orange, yellow, green, blue, indigo, violet, the numbers 1 through 10, and then TRUE, FALSE. Create it so that the list appears as a list of 3 in the global environment.
+
+4) Type a line of code (a function) that returns (finds and records) the 5th item in the list.

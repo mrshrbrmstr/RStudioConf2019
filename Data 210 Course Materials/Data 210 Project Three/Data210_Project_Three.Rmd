@@ -1,0 +1,48 @@
+---
+title: "R Notebook: Project Three"
+author: "Mary E Rudis"
+date: '2/27/2018'
+output: 
+html_document:
+    df_print: paged
+---
+
+## Data 210G - Project Three - DUE March 18, 2018
+
+This project is about cleaning, tidying, a dataset.
+
+Look for a file in Blackboard called "Hospital Revised Flatfiles". It is a .pdf document that describes survey data on the effectiveness and/or quality of health care at the nation's hospital services providers.
+
+Your task is to locate and upload into R three of the data files:
+
+### 1) Hospital General Information.csv
+### 2) Complications and Deaths - Hospital.csv
+### 3) Unplanned Hospital Visits - Hospital.csv
+
+Once uploaded into R, you will perform the following:
+
+1) In Complications and Deaths file, each hospital should have exactly one row with data from some of the rows converted to columns using the following Headers:
+"AMI Mortality Measure Name","AMI Mortality Measure ID","AMI Mortality Compared to National",
+"COPD Mortality Measure Name","COPD Mortality Measure ID","COPD Mortality Compared to National",	
+"HF Mortality Measure Name","HF Mortality Measure ID","HF Mortality Compared to National",	
+"PN Mortality Measure Name","PN Mortality Measure ID","PN Mortality Compared to National",	
+"STK Mortality Measure Name","STK Mortality Measure ID","STK Mortality Compared to National"
+
+2) Using the data frame from the Unplanned Hospital Visits file, again each hospital should have exactly one row with data from multiple rows converted to columns using the SAME variables as with mortality but replace "Mortality" with "Readmission" in all of the headers/column names.
+
+3) Merge the three datasets into one data table by pasting the columns, matching each row by hospital ID.
+
+4) Tidy the names of all variables (column names) so that they are lower case, and instead of spaces between words use "_" between words.
+
+5) Variables that have two values: "Yes" and "No" change to "y" and "n"
+
+6) Zip code should remain a 5-digit character type. If not, then the leading zero is lost.
+
+7) Encode the following variables into 'factor' so that each possible value is assigned a label for plotting and analysis: variables are 
+"hospital_type", "hospital_owner", "emergency_services",
+"(measure)_compared_to_national" <-- there are 10 of these based on AMI, COPD, HF, PN, STK, mortality and readmission
+
+8) Remove any extraneous symbols, make sure entries in each column match each other when they should match and that all entries follow the same pattern - numeric and/or text
+
+7) Once you are done, submit the cleaned, tidied dataset as a single .csv file and the R script that you created to perform the task. 
+If you submit as a .Rmd file with instructions on getting the .csv files that are needed for the assignment, and instructions for reading the files from the "working directory", and if ALL instructions are completed, you can earn 100%
