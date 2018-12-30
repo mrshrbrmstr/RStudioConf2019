@@ -8,14 +8,16 @@ Apparently I am one of the few mathematicians that can say yes to all of the fol
 1) As math department chair at a community college, I created the nation's first Certificate in Data Science
 2) Educational background includes pure mathematics (PhD level), statistics and undergraduate computer science
 3) Helped develop white papers on Data Science curriculum in the 21st century:
+
     South Big Data Hub Report https://drive.google.com/file/d/14l_PGq4AxOP9fhJbKqA2necsJZ-gdiKV/view
+    
     Summit on Data Science at Two-Year Colleges https://www.amstat.org/ASA/Education/Two-Year-College-Data-Science-Summit.aspx
     
    Okay, so I am the only mathematician that can say yes to all of the above. Read on.
 
-# What Is Here
+# What Is Here In This Repo
 
-## In The Beginning
+## Stuff People Use That I No Longer Use
 
 ### Calculator Stats
 
@@ -44,5 +46,27 @@ The committee on statistics education is very active. It influences community co
 AMATYC Statistics Resources: https://amatyc.site-ym.com/page/StatsResources?
 Data Science Subcommittee: https://amatyc.site-ym.com/page/DataResources
 
+#### DS Program Building
 
+AMATYC Conference 2017 Talk Titled "So You Wanna Build a Data Science Program"
+Useful for anyone at the beginning stages of creating either a certificate or associate degree program in data literacy with the purpose of creating a more data literate population.
+
+#### Visualize This
+
+AMATYC Conference 2017 Talk titled "Visualize This: Some Plots in R"
+Useful for Intro Stats lesson planning and illustration of topics like linear regression.
+
+## DATA 210
+
+The course number is irrelevant. This is what many of us believe ought to be a student's introduction to data science. Not everything is in this repository, but the main projects are. The course itself, when students are gathered with the professor, ought to be largely discussion driven. It helps to have students that do the readings and work out the sample code prior to class. Ethical concerns are a large part of class discussion, as are things like debugging/error handling.
+
+## Stuff I Use And Encourage Others To Use
+
+I consider myself to be somewhat of an expert on "how people learn" new things. Not just new things, but how we go from concrete to abstract concepts, and how we learn mathematical concepts - like graphing for example. If we (by "we" I mean the R Community at large) want to see R and RStudio a household name, then it is going to take grassroots effort to make that happen. Consider "Texas Instruments". How is it that every classroom and every kid that is planning to take the SAT has one of these $100 things that becomes completely useless after high school?
+
+Answer: Provide free training for educators with free equipment, provide classroom materials free, work with Big Standardized Testing Agency - College Board - and get them to allow your platform during testing.
+
+Since I can't do any of those things, I decided to start by making RStudio easier to use than a graphing calculator. I've written code snippets that can be copied and pasted into R Console or New R File, then by changing just a few numbers a student can have output that allows for more time to think about the meaning behind the result and less time trying to use a complicated formula or trying to look something up in a confusing table.
+
+Browse around but be careful not to spill coffee on anything. Constructive feedback is welcome.
 
