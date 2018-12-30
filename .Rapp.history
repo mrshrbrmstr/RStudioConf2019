@@ -1,0 +1,68 @@
+library(purrr)#
+x <- rdunif(10000,5,1)#
+#
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)#
+hist(x, freq=FALSE, breaks = edges)#
+#
+y <- rbinom(10000,size=4,p=0.5) + 1#
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)#
+hist(y, freq=FALSE, breaks = edges)#
+#
+y <- rbinom(1, size = 4, p = 0.5) + 1#
+edges <- c(0.5,1.5,2.5,3.5,4.5,5.5)#
+hist(y, freq=FALSE, breaks = edges)#
+#
+library(stats)#
+library(graphics)#
+library(ggplot2)#
+#
+chk <- chickwts#
+boxplot(weight ~ feed, data = chk, col = "yellow",#
+        main = "chickwt data",#
+        ylab = "Weight at six weeks (gm)")#
+#
+p2 <- ggplot(chk, aes(x = weight, fill = feed)) +#
+  geom_density(alpha = 0.7, stat = "density") +#
+  scale_colour_brewer(type = "qual")#
+p2#
+# Separate out each feed type as its own data#
+chk_horsebean <- chk[1:10,1]#
+chk_linseed <- chk[11:22,1]#
+chk_soybean <- chk[23:36,1]#
+chk_sunflower <- chk[37:48,1]#
+chk_meatmeal <- chk[49:59,1]#
+chk_casein <- chk[60:71,1]#
+#
+stem(chk_casein)#
+stem(chk_horsebean)#
+stem(chk_linseed)#
+stem(chk_meatmeal)#
+stem(chk_soybean)#
+stem(chk_sunflower)
+library(ggplot2)#
+library(ggpubr)#
+# ggplot(iris, aes(x = Sepal.Length, fill = Species)) +#
+#  geom_density(alpha = 0.7) +#
+#  scale_colour_brewer(type = "qual", aesthetics = "fill")#
+#
+# Using ggplot2 to create multiple simulated data distributions#
+# on a single graph#
+#
+phillies_data1 <- rpois(162,7.23) # strikeout data per 9 IP#
+phillies_data2 <- rpois(162, 3.86) # runs per game data#
+phillies_data3 <- rpois(162, 0.80) # homers per game data#
+phillies_data <- as.numeric(c(phillies_data1, phillies_data2, phillies_data3))#
+#
+measure_type <- c(rep("strikeouts", 162), rep("runs per game", 162),#
+                            rep("homers per game", 162))#
+baseball_data <- cbind.data.frame(phillies_data, measure_type)#
+#
+plot1 <- ggplot(baseball_data, aes(x = phillies_data, fill = measure_type)) +#
+      geom_bar(alpha = 0.7, position = "dodge", width = 0.6) +#
+      scale_colour_brewer(type = "qual") +#
+      theme(legend.position="none")#
+plot2 <- ggplot(baseball_data, aes(x = phillies_data, fill = measure_type)) +#
+        geom_density(alpha = 0.7, stat = "count") +#
+        scale_colour_brewer(type = "qual")#
+#
+ggarrange(plot1, plot2, ncol = 2, nrow = 1)
