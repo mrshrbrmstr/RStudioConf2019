@@ -37,9 +37,19 @@ Of note: the elephant in the room. When I go around talking about data-driven st
 
 ## AMATYC - Where Change Can Happen
 
+### R For Statistics - Educating the Educator
+
+AMATYC stands for "American Mathematical Association of Two Year Colleges" and its members consist of mathematics and statistics educators and those who wish to work with mathematics and statistics educators at the nation's two year colleges. Anyone can join. The annual conference is held in different regions of the country from year to year - always in November - and speakers come from industry, education, government & non-profit philanthropic organizations.
+
+How R is revolutionizing statistics education in America - Shiny is making it easier to develop training materials for statistics educators. AMATYC members and others are working in collaboration, funded by an NSF grant, to provide in-person, hands on training for those whose computer expertise consists of email, web browsing, MS Office and perhaps a few other cloud-based applications.
+
+Initially, the grant funds three years of summer workshops but there is a potential for more IF they can get this off the ground and get more people involved. The workshop is called StatPREP (http://statprep.org/) and HERE are the folks that are working to make R for Statistics at two year colleges around the country possible. http://statprep.org/the-statprep-team/
+
+Along with their efforts I am working on a booklet that would serve as a supplement to any Intro Stats textbook that an educator might choose for their course, hence this repository.
+
 ### DS Program Building & Visualize This
 
-AMATYC is "American Mathematical Association of Two Year Colleges" and is partner with many of the more well-known organizations involved in the mathematical and statistics education we all experience in our institutions of higher learning. The list is here: https://amatyc.site-ym.com/page/AMATYCAffiliateOrg
+AMATYC is partner with many of the more well-known organizations involved in the mathematical and statistics education we all experience in our institutions of higher learning. The list is here: https://amatyc.site-ym.com/page/AMATYCAffiliateOrg
 
 The committee on statistics education is very active. It influences community college educators all across the country. Members of AMATYC can access webinars and professional development opportunities as well as the annual conference held in November each year. In this folder are two presentations I gave in 2017. Some useful links:
 
