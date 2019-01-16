@@ -60,6 +60,10 @@ Useful for Intro Stats lesson planning and illustration of topics like linear re
 
 The course number is irrelevant. This is what many of us believe ought to be a student's introduction to data science. Not everything is in this repository, but the main projects are. The course itself, when students are gathered with the professor, ought to be largely discussion driven. It helps to have students that do the readings and work out the sample code prior to class. Ethical concerns are a large part of class discussion, as are things like debugging/error handling.
 
+## South Big Data Hub
+
+[![Keeping Data Science Broad Series](https://i.ytimg.com/vi/VH6wmwoUejM/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDxu7puKQSomYWSl0Zo6hGEfDe3hQ)](https://www.youtube.com/playlist?list=PLyUNw5pgUji-Vv4zB2NFJDVrg_rwMTIHT)
+
 ## Stuff I Use And Encourage Others To Use
 
 I consider myself to be somewhat of an expert on "how people learn" new things. Not just new things, but how we go from concrete to abstract concepts, and how we learn mathematical concepts - like graphing for example. If we (by "we" I mean the R Community at large) want to see R and RStudio a household name, then it is going to take grassroots effort to make that happen. Consider "Texas Instruments". How is it that every classroom and every kid that is planning to take the SAT has one of these $100 things that becomes completely useless after high school?
