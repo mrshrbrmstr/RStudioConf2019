@@ -2,6 +2,9 @@
 
 How statistics education has evolved just in the last ten years is quite remarkable. Contained in this repository are examples of how one educator has changed the way statistics is taught at the introductory level - with very little prior math background assumed. But we have a long way to go in order to convince the thousands of statistics teachers that still resist change.
 
+Link to talk slides: 
+https://mrshrbrmstr.github.io/RStudioConf2019/pres/Marys_slides-rev/assets/player/KeynoteDHTMLPlayer.html#35
+
 # Who Am I
 
 Apparently I am one of the few mathematicians that can say yes to all of the following:
